@@ -3,6 +3,10 @@
 A machine learning project that classifies crime report narratives into categories using **NLTK** and **scikit-learn**.  
 The goal is to demonstrate natural language processing (NLP) techniques for text preprocessing, feature extraction, and classification.  
 
+
+[Crime-classifier](https://crime-classifier.vercel.app/)
+
+
 ---
 
 ## Features  
