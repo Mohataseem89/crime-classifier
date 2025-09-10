@@ -28,6 +28,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/Mohataseem89/lapd-classifier.git
 cd crime-classifier
+npm install
 npm start
 
 ```
