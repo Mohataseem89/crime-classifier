@@ -522,7 +522,6 @@ const ClassifierGUI = () => {
   );
 };
 
-// Fixed the App function to use the correct component name
 function App() {
   return (
     <div className="App">
