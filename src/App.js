@@ -87,6 +87,12 @@ const ClassifierGUI = () => {
     addLog('Models trained successfully!', 'success');
   };
 
+
+
+
+
+
+
   const simulateTesting = async () => {
     if (!modelTrained) {
       addLog('Please train the models first', 'error');
@@ -100,22 +106,23 @@ const ClassifierGUI = () => {
 
     setIsTesting(true);
     addLog('Starting classification testing...', 'info');
+    const uniqueClassifications = [...new Set(trainingData.map(item => item.classification))];
+
 
     const mockResults = testData.map((item, index) => {
-      const classifications = ['THEFT', 'ASSAULT', 'VANDALISM', 'BURGLARY', 'FRAUD'];
-      const actual = item.classification || classifications[Math.floor(Math.random() * classifications.length)];
-      const maxent = classifications[Math.floor(Math.random() * classifications.length)];
-      const svc = classifications[Math.floor(Math.random() * classifications.length)];
+    const actual = item.classification;
+    const maxent = uniqueClassifications[Math.floor(Math.random() * uniqueClassifications.length)];
+    const svc = uniqueClassifications[Math.floor(Math.random() * uniqueClassifications.length)];
 
-      return {
-        id: index + 1,
-        narrative: item.NARRATIVE?.substring(0, 100) + '...',
-        actual,
-        maxent,
-        svc,
-        maxentCorrect: actual === maxent,
-        svcCorrect: actual === svc
-      };
+    return {
+      id: index + 1,
+      narrative: item.NARRATIVE?.substring(0, 100) + '...',
+      actual,
+      maxent,
+      svc,
+      maxentCorrect: actual === maxent,
+      svcCorrect: actual === svc
+    };
     });
 
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -129,6 +136,13 @@ const ClassifierGUI = () => {
     setIsTesting(false);
     addLog(`Testing completed. MaxEnt: ${maxentAccuracy}% | SVC: ${svcAccuracy}%`, 'success');
   };
+
+
+
+
+
+
+
 
   const classifyText = async () => {
     if (!modelTrained) {
@@ -145,15 +159,17 @@ const ClassifierGUI = () => {
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const classifications = ['THEFT', 'ASSAULT', 'VANDALISM', 'BURGLARY', 'FRAUD'];
-    const result = {
-      maxent: classifications[Math.floor(Math.random() * classifications.length)],
-      svc: classifications[Math.floor(Math.random() * classifications.length)],
-      confidence: {
-        maxent: (Math.random() * 0.3 + 0.7).toFixed(3),
-        svc: (Math.random() * 0.3 + 0.7).toFixed(3)
-      }
-    };
+    // const classifications = ['THEFT', 'ASSAULT', 'VANDALISM', 'BURGLARY', 'FRAUD'];
+      const uniqueClassifications = [...new Set(trainingData.map(item => item.classification))];
+
+   const result = {
+    maxent: uniqueClassifications[Math.floor(Math.random() * uniqueClassifications.length)],
+    svc: uniqueClassifications[Math.floor(Math.random() * uniqueClassifications.length)],
+    confidence: {
+      maxent: (Math.random() * 0.3 + 0.7).toFixed(3),
+      svc: (Math.random() * 0.3 + 0.7).toFixed(3)
+    }
+  };
 
     setClassificationResult(result);
     addLog('Text classified successfully', 'success');
