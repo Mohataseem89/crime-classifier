@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Play, Download, FileText, BarChart3, Settings, AlertCircle, CheckCircle, Loader } from 'lucide-react';
 
-// Keep the same component name as you defined
 const ClassifierGUI = () => {
   const [trainingData, setTrainingData] = useState(null);
   const [testData, setTestData] = useState(null);
